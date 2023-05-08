@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Project</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+			<script type="text/javascript">
+		;(function(){
+			var modificators = [],
+				nv = navigator,
+				pl = nv.platform.toLowerCase(),
+				ua = nv.userAgent.toLowerCase(),
+				an = nv.appName.toLowerCase(),
+				htmlElement = document.documentElement,
+				ls = localStorage;
+
+			function pli(s){return pl.indexOf(s) > -1;}
+			function uai(s){return ua.indexOf(s) > -1;}
+			function ani(s){return an.indexOf(s) > -1;}
+
+			// Platform
+			var platformClass = uai('iphone') || uai('ipod') || uai('ipad') || uai('android') || uai('iemobile') || uai('blackberry') || uai('bada') ? '_mobile' : '_desktop';
+			modificators.push(platformClass);
+
+			// OS
+			var osClass = '';
+			if (uai('ipad') || uai('iphone') || uai('ipod')) {
+				osClass = '_ios';
+			} else if (uai('android')) {
+				osClass = '_android';
+			} else if (pli('win')) {
+				osClass = '_win';
+			} else if (pli('mac')) {
+				osClass = '_mac';
+			} else if (pli('linux')) {
+				osClass = '_linux';
+			}
+			modificators.push(osClass);
+
+			// Browser
+			var browserClass = '';
+			if (uai('firefox')) {
+				browserClass = '_ff';
+			} else if (uai('opr')) {
+				browserClass = '_opera';
+			} else if (uai('yabrowser')) {
+				browserClass = '_yandex';
+			} else if (uai('edge')) {
+				browserClass = '_edge';
+			} else if (uai('trident') || ani('explorer') || ani('msie')) {
+				browserClass = '_ie';
+			} else if (uai('safari') && !uai('chrome')) {
+				browserClass = '_safari';
+			} else if (uai('chrome')) {
+				browserClass = '_chrome';
+			}
+			modificators.push(browserClass);
+
+			window.environmentObject = {
+				platform: platformClass,
+				os: osClass,
+				browser: browserClass,
+				isLocal: window.location.href.indexOf('http://localhost:') == 0
+			};
+			htmlElement.className += ' ' + modificators.join(' ');
+
+			// SVG sprites
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'assets/svg/sprite.svg', true);
+			xhr.overrideMimeType('image/svg+xml');
+			
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+					function waitForBody(){
+						if(document.body){
+							var containerClass = 'invisible-container';
+							var container = document.querySelector('.'+containerClass);
+							if(!container){
+								container = document.createElement('div');
+								container.className = containerClass;
+								document.body.insertBefore(container, document.body.firstChild);
+							}
+							container.appendChild(xhr.responseXML.documentElement);
+						} else {
+							setTimeout(waitForBody, 16);
+						}
+					}
+
+					waitForBody();	
+				};
+			}
+
+			xhr.send('');
+		})();
+	</script>
+
+
+			<link rel="stylesheet" href="assets/css/styles.css?hash" />
+	</head>
+	<body>
+
+		<div class="wrapper">
+
+
+<header class="header">
+	<div class="header__container">
+		<a href="#" class="header__logo">
+				<svg class="logo-svg" viewBox="0 0 89 32" style="width: 89px; height: 32px;">
+		<use xlink:href="#icon-logo" />
+	</svg>
+
+		</a>
+			<nav class="menu">
+		<a href="" class="menu__item _active">
+				<svg class="search-svg" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+		<use xlink:href="#icon-search" />
+	</svg>
+
+		</a>
+		<a href="" class="menu__item _active cart">
+				<svg class="cart-svg" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+		<use xlink:href="#icon-cart" />
+	</svg>
+
+			<div class="cart__counter" data-basket-product-count></div>
+		</a>
+	</nav>
+
+		<div class="header-burger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+</header>
+
+	<div class="warp">
+
+		<main class="main">
+			<div class="container">
+
+				<div class="steps">
+					<div class="steps__item _accept">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Account</div>
+						</div>
+					</div>
+					<div class="steps__item _accept">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Shipping</div>
+						</div>
+					</div>
+					<div class="steps__item _active">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Billing</div>
+						</div>
+					</div>
+					<div class="steps__item">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Review</div>
+						</div>
+					</div>
+				</div>
+
+				<form class="billing">
+					<div class="billing__container">
+						<div class="billing__title h2">Billing Information</div>
+						<div class="billing__radio-btns">
+							<label class="radio-btn">
+								<input class="radio-btn__input" name="billing" type="radio" checked>
+								<div class="radio-btn__box"></div>
+								<div class="radio-btn__text">Pay with Credit Card</div>
+							</label>
+							<label class="radio-btn">
+								<input class="radio-btn__input" name="billing" type="radio">
+								<div class="radio-btn__box"></div>
+								<div class="radio-btn__text">
+										<svg class="paypal-svg" width="85" height="23" viewBox="0 0 85 23">
+		<use xlink:href="#icon-paypal" />
+	</svg>
+
+								</div>
+							</label>
+						</div>
+					</div>
+
+					<div class="billing-card">
+						<label class="input ">
+        <div class="input__name">
+            <span>Name on card</span>
+        </div>
+    <div class="input__wrap">
+        <input type="text" class="input__field" placeholder="Placeholder Text">
+    </div>
+</label>
+
+						<label class="input input--sm">
+							<div class="input__name">
+								<span>Card number</span>
+								<!-- <div class="input__info">
+									<span>?</span>
+									<div class="input__info-text">
+										Что это такое?
+									</div>
+								</div> -->
+							</div>
+							<div class="input__wrap">
+								<input type="text" id="num-card1" class="input__field" autocomplete="off" maxlength="4">
+								<input type="text" id="num-card2" class="input__field" autocomplete="off" maxlength="4">
+								<input type="text" id="num-card3" class="input__field" autocomplete="off" maxlength="4">
+								<input type="text" id="num-card4" class="input__field" autocomplete="off" maxlength="4">
+							</div>
+						</label>
+						<label class="input input--sm">
+        <div class="input__name">
+            <span>Expire date</span>
+        </div>
+    <div class="input__wrap">
+        <input type="text" class="input__field" placeholder="">
+    </div>
+</label>
+
+						<label class="input input--sm">
+        <div class="input__name">
+            <span>CVV&nbsp;code</span>
+                <div class="input__info">
+                    <span>?</span>
+                    <div class="input__info-text">
+                        Что это такое? ...
+                    </div>
+                </div>
+        </div>
+    <div class="input__wrap">
+        <input type="number" class="input__field" placeholder="">
+    </div>
+</label>
+
+					</div>
+
+					<div class="billing__container">
+						<div class="billing__checkbox-btns">
+							<label class="checkbox-btn">
+								<input class="checkbox-btn__input" name="billing" type="checkbox" checked>
+								<div class="checkbox-btn__box"></div>
+								<div class="checkbox-btn__text">Save information of this credit card</div>
+							</label>
+							<label class="checkbox-btn">
+								<input class="checkbox-btn__input" name="billing" type="checkbox">
+								<div class="checkbox-btn__box"></div>
+								<div class="checkbox-btn__text">I accept the <a href="#">terms and comditions</a> and the <a href="#">Privacy Policies</a></div>
+							</label>
+						</div>
+					</div>
+
+					<div class="billing__container">
+						<div class="billing__bottom">
+							<button class="button">
+	Back
+</button>
+
+							<button class="button button--blue">
+	Check Out
+</button>
+
+						</div>
+					</div>
+					
+				</form>
+
+			</div>
+		</main>
+
+		<aside class="aside">
+			<div class="aside__item basket">
+				<div class="basket__title h2">My basket</div>
+				<div class="basket__wrap">
+					<div class="basket__item product" data-product-price-item="228">
+    <div class="product__img">
+        <img src="../assets/images/product1.png" alt="">
+    </div>
+    <div class="product__info">
+        <a href="#" class="product__name">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit</a>
+        <div class="product__bottom">
+            <div class="product__count count">
+                <button class="count__min" data-product-count-minus>
+                    	<svg class="min-svg" width="21" height="20" viewBox="0 0 21 20">
+		<use xlink:href="#icon-min" />
+	</svg>
+
+                </button>
+                <input class="count__num" type="number" value="1" min="1" readonly data-product-count>
+                <button class="count__plus" data-product-count-plus>
+                    	<svg class="plus-svg" width="21" height="20" viewBox="0 0 21 20">
+		<use xlink:href="#icon-plus" />
+	</svg>
+
+                </button>
+            </div>
+            <div class="product__price" data-product-price>
+                $ <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="product__del" data-product-remove>
+        	<svg class="del-svg" width="19" height="18" viewBox="0 0 19 18">
+		<use xlink:href="#icon-del" />
+	</svg>
+
+    </div>
+</div>
+
+
+					<div class="basket__item product" data-product-price-item="1337">
+    <div class="product__img">
+        <img src="../assets/images/product2.png" alt="">
+    </div>
+    <div class="product__info">
+        <a href="#" class="product__name">Amet minim mollit non </a>
+        <div class="product__bottom">
+            <div class="product__count count">
+                <button class="count__min" data-product-count-minus>
+                    	<svg class="min-svg" width="21" height="20" viewBox="0 0 21 20">
+		<use xlink:href="#icon-min" />
+	</svg>
+
+                </button>
+                <input class="count__num" type="number" value="1" min="1" readonly data-product-count>
+                <button class="count__plus" data-product-count-plus>
+                    	<svg class="plus-svg" width="21" height="20" viewBox="0 0 21 20">
+		<use xlink:href="#icon-plus" />
+	</svg>
+
+                </button>
+            </div>
+            <div class="product__price" data-product-price>
+                $ <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="product__del" data-product-remove>
+        	<svg class="del-svg" width="19" height="18" viewBox="0 0 19 18">
+		<use xlink:href="#icon-del" />
+	</svg>
+
+    </div>
+</div>
+
+				</div>
+			</div>
+			<div class="aside__item promo">
+				<div class="promo__title h2">Promo code</div>
+				<div class="promo__wrap">
+					<label class="input ">
+    <div class="input__wrap">
+        <input type="text" class="input__field" placeholder="Placeholder Text">
+    </div>
+</label>
+
+					<button class="button button--blue">
+	Apply
+</button>
+
+				</div>
+			</div>
+			<div class="aside__item subtotal">
+				<div class="subtotal__item" data-basket-product-sum>
+					<div class="subtotal__name">Subtotal</div>
+					<div class="subtotal__num">
+						$<span>1 050</span>
+					</div>
+				</div>
+				<div class="subtotal__item" data-basket-tax>
+					<div class="subtotal__name">Tax</div>
+					<div class="subtotal__num">
+						$<span>100</span>
+					</div>
+				</div>
+				<div class="subtotal__item" data-basket-shipping>
+					<div class="subtotal__name">Shipping</div>
+					<div class="subtotal__num">
+						$<span>150</span>
+					</div>
+				</div>
+				<div class="subtotal__sum" data-basket-total-sum>
+					<div class="subtotal__name">Total</div>
+					<div class="subtotal__num">
+						$<span>1 300</span>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+	</div>
+	
+		</div>
+
+			<script src="assets/js/bundle.js?hash"></script>
+	</body>
+</html>
