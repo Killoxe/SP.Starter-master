@@ -1,0 +1,19 @@
+{% from "../../components/menu/menu.nunj" import menu %}
+
+<header class="header">
+	<div class="header__container">
+		<a href="#" class="header__logo">
+			{{ icon({
+				iconName: 'logo',
+				className: 'logo-svg',
+				attributes: 'viewBox="0 0 89 32" style="width: 89px; height: 32px;"'
+			}) }}
+		</a>
+		{{ menu() }}
+		<div class="header-burger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+</header>

@@ -1,0 +1,24 @@
+.wrapper {
+	position: relative;
+	min-height: 100vh;
+}
+
+.container {
+	margin: auto;
+	padding: 60px;
+	box-sizing: content-box;
+
+	@include max-screen($max: 1600px,) {
+        padding: 60px 50px;
+    }
+
+	@include max-screen($max: 767px,) {
+		padding: 60px 10px;
+	}
+}
+
+.container--sm {
+	margin: auto;
+	padding: 40px;
+	box-sizing: content-box;
+}

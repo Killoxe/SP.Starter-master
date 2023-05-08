@@ -1,0 +1,85 @@
+.input {
+    display: block;
+
+    &__name {
+        display: flex;
+        align-items: baseline;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 2em;
+        color: #555770;
+    }
+
+    &__info {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 13px;
+        height: 13px;
+        @include br($radius: 50%,);
+        background: #DBDBDB;
+        margin-left: 5px;
+        line-height: normal;
+        cursor: pointer;
+
+        &:hover {
+
+            .input__info-text {
+                display: block;
+            }
+        }
+    }
+
+    &__info-text {
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        min-width: 100px;
+        max-width: 200px;
+        display: none;
+        background: #FFFFFF;
+        border: 1px solid #CFCFCF;
+        padding: 5px;
+        @include br($radius: 3px,);
+    }
+
+    &__field {
+        border: none;
+        padding: 9px 10px;
+        background: #EDEDF1;
+        @include br($radius: 3px,);
+        font-size: 14px;
+        line-height: 1.7em;
+        width: 100%;
+
+        @include placeholder {
+            color: #8E90A6;
+        }
+
+        &:not(:last-child) {
+            margin-right: 30px;
+
+            @include max-screen($max: 767px,) {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &--sm {
+
+        .input__field {
+            width: 100px;
+
+            @include max-screen($max: 767px,) {
+                width: auto;
+                min-width: 70px;
+            }
+        }
+    }
+}

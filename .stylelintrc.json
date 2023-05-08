@@ -1,0 +1,20 @@
+{
+	"extends": ["stylelint-config-prettier"],
+	"plugins": ["stylelint-prettier"],
+	"rules": {
+		"prettier/prettier": true,
+		"indentation": "tab",
+		"string-quotes": "single",
+		"color-hex-case": "upper",
+		"selector-attribute-quotes": "always",
+		"selector-attribute-operator-space-before": "always",
+		"selector-attribute-operator-space-after": "always",
+		"declaration-block-trailing-semicolon": "always",
+		"declaration-colon-space-before": "never",
+		"declaration-colon-space-after": "always",
+		"function-url-quotes": "always",
+		"media-feature-parentheses-space-inside": "never",
+		"media-feature-colon-space-before": "never",
+		"media-feature-colon-space-after": "always"
+	}
+}

@@ -1,0 +1,208 @@
+{% extends "../templates/base.nunj" %}
+
+{% from "../components/button/button.nunj" import button %}
+{% from "../components/icon/icon.nunj" import icon %}
+{% from "../components/product/product.nunj" import product %}
+{% from "../components/input/input.nunj" import input %}
+
+{# Пример расширения существующего блока #}
+{# Например можно использовать для добавления уникальных тайтлов для каждой страницы #}
+{# {% block title %}Home / {{ super() }}{% endblock title %} #}
+
+{% block content %}
+
+	{% include '../includes/header/header.nunj' %}
+
+	<div class="warp">
+
+		<main class="main">
+			<div class="container">
+
+				<div class="steps">
+					<div class="steps__item _accept">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Account</div>
+						</div>
+					</div>
+					<div class="steps__item _accept">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Shipping</div>
+						</div>
+					</div>
+					<div class="steps__item _active">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Billing</div>
+						</div>
+					</div>
+					<div class="steps__item">
+						<div class="steps__wrap">
+							<div class="steps__num"></div>
+							<div class="steps__name">Review</div>
+						</div>
+					</div>
+				</div>
+
+				<form class="billing">
+					<div class="billing__container">
+						<div class="billing__title h2">Billing Information</div>
+						<div class="billing__radio-btns">
+							<label class="radio-btn">
+								<input class="radio-btn__input" name="billing" type="radio" checked>
+								<div class="radio-btn__box"></div>
+								<div class="radio-btn__text">Pay with Credit Card</div>
+							</label>
+							<label class="radio-btn">
+								<input class="radio-btn__input" name="billing" type="radio">
+								<div class="radio-btn__box"></div>
+								<div class="radio-btn__text">
+									{{ icon({
+										iconName: 'paypal',
+										className: 'paypal-svg',
+										attributes: 'width="85" height="23" viewBox="0 0 85 23"'
+									}) }}
+								</div>
+							</label>
+						</div>
+					</div>
+
+					<div class="billing-card">
+						{{ input({
+							nameWrap: true,
+							name: 'Name on card',
+							infoWrap: false,
+							type: 'text',
+							placeholder: 'Placeholder Text'
+						}) }}
+						<label class="input input--sm">
+							<div class="input__name">
+								<span>Card number</span>
+								<!-- <div class="input__info">
+									<span>?</span>
+									<div class="input__info-text">
+										Что это такое?
+									</div>
+								</div> -->
+							</div>
+							<div class="input__wrap">
+								<input type="text" id="num-card1" class="input__field" autocomplete="off" maxlength="4">
+								<input type="text" id="num-card2" class="input__field" autocomplete="off" maxlength="4">
+								<input type="text" id="num-card3" class="input__field" autocomplete="off" maxlength="4">
+								<input type="text" id="num-card4" class="input__field" autocomplete="off" maxlength="4">
+							</div>
+						</label>
+						{{ input({
+							class: 'input--sm',
+							nameWrap: true,
+							name: 'Expire date',
+							infoWrap: false,
+							type: 'text'
+						}) }}
+						{{ input({
+							class: 'input--sm',
+							nameWrap: true,
+							name: 'CVV&nbsp;code',
+							infoWrap: true,
+							infoText: 'Что это такое? ...',
+							type: 'number'
+						}) }}
+					</div>
+
+					<div class="billing__container">
+						<div class="billing__checkbox-btns">
+							<label class="checkbox-btn">
+								<input class="checkbox-btn__input" name="billing" type="checkbox" checked>
+								<div class="checkbox-btn__box"></div>
+								<div class="checkbox-btn__text">Save information of this credit card</div>
+							</label>
+							<label class="checkbox-btn">
+								<input class="checkbox-btn__input" name="billing" type="checkbox">
+								<div class="checkbox-btn__box"></div>
+								<div class="checkbox-btn__text">I accept the <a href="#">terms and comditions</a> and the <a href="#">Privacy Policies</a></div>
+							</label>
+						</div>
+					</div>
+
+					<div class="billing__container">
+						<div class="billing__bottom">
+							{{ button({
+								className: '',
+								children: 'Back'
+							}) }}
+							{{ button({
+								className: 'button--blue',
+								children: 'Check Out'
+							}) }}
+						</div>
+					</div>
+					
+				</form>
+
+			</div>
+		</main>
+
+		<aside class="aside">
+			<div class="aside__item basket">
+				<div class="basket__title h2">My basket</div>
+				<div class="basket__wrap">
+					{{ product({
+						images: '../assets/images/product1.png',
+						name: 'Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit',
+						price: 228
+					}) }}
+
+					{{ product({
+						images: '../assets/images/product2.png',
+						name: 'Amet minim mollit non ',
+						price: 1337
+					}) }}
+				</div>
+			</div>
+			<div class="aside__item promo">
+				<div class="promo__title h2">Promo code</div>
+				<div class="promo__wrap">
+					{{ input({
+						nameWrap: false,
+						infoWrap: false,
+						type: 'text',
+						placeholder: 'Placeholder Text'
+					}) }}
+					{{ button({
+						className: 'button--blue',
+						children: 'Apply'
+					}) }}
+				</div>
+			</div>
+			<div class="aside__item subtotal">
+				<div class="subtotal__item" data-basket-product-sum>
+					<div class="subtotal__name">Subtotal</div>
+					<div class="subtotal__num">
+						$<span>1 050</span>
+					</div>
+				</div>
+				<div class="subtotal__item" data-basket-tax>
+					<div class="subtotal__name">Tax</div>
+					<div class="subtotal__num">
+						$<span>100</span>
+					</div>
+				</div>
+				<div class="subtotal__item" data-basket-shipping>
+					<div class="subtotal__name">Shipping</div>
+					<div class="subtotal__num">
+						$<span>150</span>
+					</div>
+				</div>
+				<div class="subtotal__sum" data-basket-total-sum>
+					<div class="subtotal__name">Total</div>
+					<div class="subtotal__num">
+						$<span>1 300</span>
+					</div>
+				</div>
+			</div>
+		</aside>
+
+	</div>
+	
+{% endblock %}

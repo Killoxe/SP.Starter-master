@@ -1,0 +1,20 @@
+{% macro input(props) %}
+<label class="input {{ props.class }}">
+    {% if props.nameWrap %}
+        <div class="input__name">
+            <span>{{ props.name }}</span>
+            {% if props.infoWrap %}
+                <div class="input__info">
+                    <span>?</span>
+                    <div class="input__info-text">
+                        {{ props.infoText }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="input__wrap">
+        <input type="{{ props.type }}" class="input__field" placeholder="{{ props.placeholder }}">
+    </div>
+</label>
+{% endmacro %}

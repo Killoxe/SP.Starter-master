@@ -1,0 +1,374 @@
+.warp {
+    display: flex;
+    height: 100%;
+}
+
+.main {
+    width: calc(100% - 410px);
+
+    @include max-screen($max: 1199px,) {
+        width: 100%;
+    }
+}
+
+.h2 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2em;
+}
+
+.radio-btn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    &__input {
+        position: absolute;
+        opacity: 0;
+        height: 1px;
+        width: 1px;
+
+        &:checked + .radio-btn__box::before {
+            opacity: 1;
+        }
+    }
+
+    &__box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        @include br($radius: 50%,);
+        background: #FFFFFF;
+        border: 1px solid #CFCFCF;
+        margin-right: 9px;
+
+        &::before {
+            @include b;
+            width: 8px;
+            height: 8px;
+            @include br($radius: 50%,);
+            background: #3366FF;
+            opacity: 0;
+        }
+    }
+
+    &__text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.2em;
+    }
+}
+
+.checkbox-btn {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    
+    &__input {
+        position: absolute;
+        opacity: 0;
+        height: 1px;
+        width: 1px;
+
+        &:checked + .checkbox-btn__box::before {
+            opacity: 1;
+        }
+    }
+
+    &__box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        background: #FFFFFF;
+        border: 1px solid #CFCFCF;
+        margin-right: 9px;
+
+        &::before {
+            @include b;
+            width: 8px;
+            height: 8px;
+            background: #3366FF;
+            opacity: 0;
+        }
+    }
+
+    &__text {
+        margin-top: 3px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.2em;
+        color: #8C8C8C;
+
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+    }
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    counter-reset: steps;
+    margin-bottom: 60px;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: self-start;
+        position: relative;
+        width: auto;
+
+        &:not(:last-child) {
+            @include cols($cols: 1, $max-cols: 3,);
+
+            &::before {
+                @include b;
+                width: 100%;
+                left: 20px;
+                top: 10px;
+                height: 1px;
+                background: #D5D5D5;
+                z-index: -1;
+            }
+        }
+
+        &._accept {
+
+            &::before {
+                background: #3366FF;
+            }
+            
+            .steps__num {
+                border: 1px solid #3366FF;
+                background: #3366FF;
+                color: #FFFFFF;
+            }
+        }
+
+        &._active {
+
+            .steps__num {
+                border: 1px solid #3366FF;
+                color: #000000;
+            }
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__num {
+        width: 18px;
+        height: 18px;
+        @include br($radius: 50%,);
+        background: #FFFFFF;
+        border: 1px solid #D5D5D5;
+        font-size: 10px;
+        line-height: 1.5em;
+        letter-spacing: 0.2px;
+        color: #D5D5D5;
+        margin-bottom: 9px;
+
+        &::before {
+            content: counter(steps);
+            counter-increment: steps 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1px;
+        }
+    }
+
+    &__name {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.2em;
+    }
+}
+
+.billing {
+    max-width: 660px;
+    margin: auto;
+    box-sizing: content-box;
+
+    @include max-screen($max: 767px,) {
+        max-width: none;
+    }
+
+    &__container {
+        padding: 0px 30px;
+        box-sizing: content-box;
+
+        @include max-screen($max: 767px,) {
+            padding: 0px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 40px;
+
+        @include max-screen($max: 767px,) {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__radio-btns {
+        display: flex;
+        margin-bottom: 40px;
+
+        @include max-screen($max: 767px,) {
+            margin-bottom: 20px;
+        }
+    }
+
+    .radio-btn:not(:last-child) {
+        margin-right: 80px;
+
+        @include max-screen($max: 767px,) {
+            margin-right: 20px;
+        }
+    }
+
+    &__checkbox-btns {
+        margin-bottom: 40px;
+    }
+
+    .checkbox-btn:not(:last-child) {
+        margin-bottom: 12px;
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.billing-card {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 490px;
+    background: #FFFFFF;
+    border: 1px solid #CFCFCF;
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.19);
+    @include br($radius: 5px,);
+    padding: 20px 30px 46px;
+    margin-bottom: 40px;
+
+    @include max-screen($max: 767px,) {
+        padding: 0px;
+        max-width: none;
+        box-shadow: none;
+        @include br($radius: 0,);
+        border: none;
+    }
+
+    .input {
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        &:nth-child(1), 
+        &:nth-child(2) {
+            width: 100%;
+        }
+
+        &:nth-child(3) {
+            margin-right: 30px;
+
+            @include max-screen($max: 767px,) {
+                margin-right: 5px;
+            }
+        }
+
+        &:nth-child(3),
+        &:nth-child(4) {
+
+            @include max-screen($max: 767px,) {
+                width: calc(100% / 4 - 5px);
+            }
+        }
+    }
+}
+
+.aside {
+    width: 410px;
+    border-left: 1px solid #CFCFCF;
+
+    @include max-screen($max: 1199px,) {
+        display: none;
+    }
+
+    &__item {
+        padding: 40px;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #CFCFCF;
+        }
+    }
+}
+
+.basket {
+
+    &__title {
+        margin-bottom: 30px;
+    }
+
+    &__item {
+        
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+.promo {
+
+    &__title {
+        margin-bottom: 30px;
+    }
+
+    &__wrap {
+        display: flex;
+        align-items: center;
+
+        .input {
+            width: 100%;
+            margin-right: 10px;
+        }
+    }
+}
+
+.subtotal {
+    
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-right: 15px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 2.4em;
+    }
+
+    &__sum {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-right: 15px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 34px;
+    }
+    
+}

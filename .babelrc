@@ -1,0 +1,32 @@
+{
+	"presets": [
+		[
+			"@babel/env",
+			{
+				"targets": {
+					"browsers": ["last 4 versions", "ie 10"]
+				}
+			}
+		]
+	],
+	"plugins": [
+		[
+			"@babel/plugin-proposal-object-rest-spread",
+			{
+				"useBuiltIns": true
+			}
+		],
+		[
+			"module-resolver",
+			{
+				"root": ["./src/assets/js"],
+				"alias": {
+					"classes": "./src/assets/js/classes",
+					"helpers": "./src/assets/js/helpers",
+					"modules": "./src/assets/js/modules",
+					"utils": "./src/assets/js/utils"
+				}
+			}
+		]
+	]
+}

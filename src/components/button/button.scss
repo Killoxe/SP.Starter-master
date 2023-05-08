@@ -1,0 +1,44 @@
+.button {
+	padding: 8px 30px;
+	background: #FFFFFF;
+	border: 1px solid #CFCFCF;
+	@include br($radius: 3px,);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.7em;
+	cursor: pointer;
+	transition: .2s;
+
+	&:hover {
+		background-color: rgba(#000, 0.3);
+		color: rgba(#000, 0.8);
+		transition: none;
+	}
+
+	&:active {
+		background-color: rgba(#000, 0.25);
+		border-color: rgba(#000, 0.25);
+
+		.button__chevron-right {
+			transform: translateX(1px);
+			transition: none;
+		}
+	}
+
+	&__chevron-right {
+		margin-left: 5px;
+		transition: transform 0.1s ease-out,
+			fill $default-transition-duration $default-transition-function;
+	}
+
+	&--blue {
+		border: 1px solid #3366FF;
+		background: #3366FF;
+		color: #FFFFFF;
+
+		&:hover {
+			background: rgba(51, 102, 255, 0.8);
+			color: #FFFFFF;
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{% from "../icon/icon.nunj" import icon %}
+
+{% macro product(props) %}
+<div class="basket__item product" data-product-price-item="{{ props.price }}">
+    <div class="product__img">
+        <img src="{{ props.images }}" alt="">
+    </div>
+    <div class="product__info">
+        <a href="#" class="product__name">{{ props.name }}</a>
+        <div class="product__bottom">
+            <div class="product__count count">
+                <button class="count__min" data-product-count-minus>
+                    {{ icon({
+                        iconName: 'min',
+                        className: 'min-svg',
+                        attributes: 'width="21" height="20" viewBox="0 0 21 20"'
+                    }) }}
+                </button>
+                <input class="count__num" type="number" value="1" min="1" readonly data-product-count>
+                <button class="count__plus" data-product-count-plus>
+                    {{ icon({
+                        iconName: 'plus',
+                        className: 'plus-svg',
+                        attributes: 'width="21" height="20" viewBox="0 0 21 20"'
+                    }) }}
+                </button>
+            </div>
+            <div class="product__price" data-product-price>
+                $ <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="product__del" data-product-remove>
+        {{ icon({
+            iconName: 'del',
+            className: 'del-svg',
+            attributes: 'width="19" height="18" viewBox="0 0 19 18"'
+        }) }}
+    </div>
+</div>
+{% endmacro %}

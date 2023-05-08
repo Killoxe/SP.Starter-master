@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+node_modules
+bower_components
+build
+*.log
+.fuse_hidden*
+build.zip
+temp/
+*.sublime*
+package-lock.json
+yarn.lock
