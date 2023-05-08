@@ -1,7 +1,6 @@
 {
     "installCommand": "npm install",
     "outputDirectory": "build",
-    "buildCommand": "export NODE_OPTIONS=--openssl-legacy-provider npm run build",
-    "framework": "null"
+    "buildCommand": "export NODE_OPTIONS=--openssl-legacy-provider npm run build"
 }
     
